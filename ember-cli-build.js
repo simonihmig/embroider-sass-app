@@ -1,6 +1,7 @@
 'use strict';
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
@@ -27,5 +28,31 @@ module.exports = function (defaults) {
         package: 'qunit',
       },
     ],
+    packagerOptions: {
+      webpackConfig: {
+        // when this is enabled, we get `ObjectMiddleware.register: serializer for mini-css-extract-plugin/dist/CssModule/null is already registered`
+        // plugins: [new MiniCssExtractPlugin()],
+        module: {
+          rules: [
+            {
+              test: /\.s[ac]ss$/i,
+              use: [
+                MiniCssExtractPlugin.loader,
+                // app.env === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
+                {
+                  loader: 'css-loader',
+                  options: {
+                    url: false,
+                    import: true,
+                    modules: 'global',
+                  },
+                },
+                'sass-loader',
+              ],
+            },
+          ],
+        },
+      },
+    }
   });
 };
