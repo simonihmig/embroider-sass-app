@@ -1,0 +1,14 @@
+diff --git a/node_modules/@embroider/webpack/src/ember-webpack.js b/node_modules/@embroider/webpack/src/ember-webpack.js
+index 5d2d8d4..eb21596 100644
+--- a/node_modules/@embroider/webpack/src/ember-webpack.js
++++ b/node_modules/@embroider/webpack/src/ember-webpack.js
+@@ -107,6 +107,9 @@ const Webpack = (_a = class Webpack {
+                 for (let moduleName of entrypoint.modules) {
+                     entry[moduleName] = './' + moduleName;
+                 }
++                for (let styleName of entrypoint.styles) {
++                  entry[styleName] = './' + styleName;
++                }
+             }
+             let hbsOptions = {
+                 templateCompilerFile: path_1.join(this.pathToVanillaApp, templateCompiler.filename),
