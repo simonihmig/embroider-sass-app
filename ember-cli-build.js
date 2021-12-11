@@ -23,6 +23,11 @@ module.exports = function (defaults) {
 
   const { Webpack } = require('@embroider/webpack');
   return require('@embroider/compat').compatBuild(app, Webpack, {
+    staticAddonTestSupportTrees: true,
+    staticAddonTrees: true,
+    staticHelpers: true,
+    staticComponents: true,
+    splitAtRoutes: ['lazy'],
     skipBabel: [
       {
         package: 'qunit',
@@ -53,6 +58,6 @@ module.exports = function (defaults) {
           ],
         },
       },
-    }
+    },
   });
 };
